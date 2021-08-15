@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Router } from '@reach/router';
 import axios from 'axios';
 import { Link } from '@reach/router';
 import PetList from '../components/PetList';

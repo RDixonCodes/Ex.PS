@@ -3,7 +3,6 @@ import axios from 'axios';
 import { navigate, Link } from '@reach/router';
 import { Paper, 
     FormControl, 
-    InputLabel,
     OutlinedInput,
     Button, 
     FormHelperText} from '@material-ui/core';
@@ -64,10 +63,6 @@ const UpdatePet = (props) => {
         button: {
             width: "100%"
         },
-        Link: {
-            marginRight:10,
-            marginTop: 50
-        },
         h1: {
             display: "inline-block"
         }
@@ -76,9 +71,9 @@ const UpdatePet = (props) => {
     return (
         <>
         <h1 style={styles.h1}>Pet Shelter</h1>
-        <p><Link to="/" style={styles.Link}>Back to home</Link></p>
+        <p><Link to="/">Back to home</Link></p>
         <Paper elevation={6} style={styles.paper}>
-            <h1>Edit {pet.name}</h1>
+            <h1>Edit Pet</h1>
             <form onSubmit = {updatePet}>
             {errors.map((err,i) =>{return (<p key={i}>{err}</p>)
             })}

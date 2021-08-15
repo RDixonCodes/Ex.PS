@@ -9,12 +9,13 @@ const Detail = (props) => {
     const {petId} = props; 
     const [pet, setPet] = useState({});
     const [likes, setLikes] = useState(0);
+    const [count, setCount] = useState(0);
     const [errors, setErrors] = useState();
 
     const displayPet = () => {
         axios.get("http://localhost:8000/api/pets/" + props.id)
-        .then(res => {setPet(res.data) })
-        .catch(err => {console.log(err)});
+        .then(res => {setPet(res.data)})
+        .catch(err => console.log(err));
     }
 
     useEffect(() => {
@@ -29,9 +30,10 @@ const Detail = (props) => {
         }).catch(errors => { console.log(errors)});
     }
 
-    const like = _id => {
-        axios.put("http://localhost:8000/api/like/" + pet._id, { likes })
-        .then(res => { displayPet() })
+    const likePet = _id => {
+        const likePet = likes+1;
+        axios.put("http://localhost:8000/api/like/" + _id, { likes })
+        .then(res => console.log(res))
         .catch(err => console.log(err));
         document.getElementById('like_button').setAttribute("disabled", "disabled");
     }
@@ -48,12 +50,15 @@ const Detail = (props) => {
         },
         h2: {
             display:"inline-block",
-            marginRight:410
+            marginRight:430
         },
+        Link: {
+            marginLeft:-10
+        }
     }
     return (
         <div>
-            <h1 style={styles.h1}>Pet Shelter</h1> <Link to="/">back to home</Link>
+            <h1 style={styles.h1}>Pet Shelter</h1> <Link style={styles.Link} to="/">back to home</Link>
             <h2 style={styles.h2}>Details about: {pet.name} </h2>
             <DeleteButton petId={pet._id} successCallback= {() => navigate("/")}></DeleteButton>
             <Paper elevation={6} style={styles.paper}>
@@ -62,7 +67,7 @@ const Detail = (props) => {
             <p>Pet Skills: <strong>{pet.skill1} | {pet.skill2}</strong></p>
 
             <Button id="like_button" disabled={likes} color="success"
-            onClick= { e => { like(pet._id)}}>
+            onClick= { e => likePet(pet._id)}>
                 &#128077; Like {pet.name}</Button> 
                 <p>{pet.likes} like(s)</p>
             </Paper>
