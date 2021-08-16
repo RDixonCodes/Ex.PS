@@ -44,7 +44,7 @@ const PetForm = (props) => {
     const styles = {
         paper: {
             width: "50rem", padding: "1rem",
-            marginLeft:350
+            marginLeft:320
         },
         input: {
             marginBottom: "1rem",
@@ -58,16 +58,23 @@ const PetForm = (props) => {
             marginRight:10,
             marginTop: 50
         },
-        h1:{
+        h1: {
             display:"inline-Block"
+        },
+        h2: {
+            marginRight: 390
+        },
+        p: {
+            display:"inline-block",
+            marginLeft:510
         }
 
     }
     return (
         <>
         <h1 style={styles.h1}>Pet Shelter</h1>
-        <p><Link to="/" style={styles.Link}>Back to home</Link></p>
-        <h2>Know a pet needing a home?</h2>
+        <p style={styles.p}><Link to="/">Back to home</Link></p>
+        <h2 style={styles.h2}>Know a pet needing a home?</h2>
         <Paper elevation={6} style={styles.paper}>
             <h1>Pet Form</h1>
             <form onSubmit = {onSubmitHandler}>
@@ -103,7 +110,7 @@ const PetForm = (props) => {
                     value={skill2} onChange={(e)=>setSkill2(e.target.value)} color="secondary"/>
                     </FormControl><br/>
                 <Button type="submit" variant="contained" color="primary">
-                    Add Pet
+                &#x21ea; Add Pet
                 </Button>
             </form>
         </Paper>

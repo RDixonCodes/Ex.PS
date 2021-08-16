@@ -64,14 +64,20 @@ const UpdatePet = (props) => {
             width: "100%"
         },
         h1: {
-            display: "inline-block"
+            display: "inline-block",
+            marginTop:50
+        },
+        p: {
+            display:"inline-block",
+            marginRight:-220,
+            marginLeft:115
         }
 
     }
     return (
         <>
         <h1 style={styles.h1}>Pet Shelter</h1>
-        <p><Link to="/">Back to home</Link></p>
+        <p style={styles.p}><Link to="/">Back to home</Link></p>
         <Paper elevation={6} style={styles.paper}>
             <h1>Edit Pet</h1>
             <form onSubmit = {updatePet}>

@@ -23,18 +23,23 @@ const PetList = (props) => {
     }
     const styles = {
         h1: {
-            display: "inline-block"
+            marginRight:1200
+        },
+        h2: {
+            display:"inline-block"
+
         },
         Link: {
-            display: "inline-block"
+            display: "inline-block",
+            marginLeft: 658
         }
     }
     
     return (
         <>
-        <h1 stlye={{display:"inline-block"}}>Pet Shelter</h1>
-        <Link stlye={{display:"inline-block"}}  to="/pets/new">add a pet to the shelter</Link>
-        <h2>These pets are looking for a good home</h2>
+        <h1 style={styles.h1}>Pet Shelter</h1>
+        <h2 style={styles.h2}>These pets are looking for a good home:</h2>
+        <Link style={styles.Link}  to="/pets/new">add a pet to the shelter</Link>
         <table className = "table table-secondary table-bordered" >
         <thead>
         <tr>
@@ -46,7 +51,7 @@ const PetList = (props) => {
             <th>Actions</th>
         </tr>
         </thead>
-        {props.pets.sort((pet,i) => (pet.type.toString() > i.type.toString()) ? 1 : -1).map((pet, i) => {
+        {props.pets.sort((pet,i) => (pet.type.toLowerCase() > i.type.toLowerCase()) ? 1 : -1).map((pet, i) => {
                 return (
         <tbody key={i}>
         <tr> 
