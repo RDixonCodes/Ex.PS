@@ -63,7 +63,7 @@ const Detail = (props) => {
             <p>Pet Skills: <strong>{pet.skill1} | {pet.skill2} | { pet.skill3 }</strong></p>
 
             <Button id="like_button" disabled={likes} color="success"
-            onClick= { e => likePet(pet._id) }>
+            onClick= { (e) => likePet(pet._id) }>
                 &#128077; Like {pet.name}</Button> 
                 <p>{pet.likes} like(s)</p>
             </Paper>
