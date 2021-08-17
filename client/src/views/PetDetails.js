@@ -28,10 +28,10 @@ const Detail = (props) => {
     }
 
     const likePet = _id => {
-        axios.put("http://localhost:8000/api/like/" + _id, { likes })
-        .then(res => setLikes(likes + 1))
+        axios.put("http://localhost:8000/api/like/" + _id, { likes:1 })
+        .then(res => console.log(res.data))
         .catch(err => console.log(err));
-        document.getElementById('like_button').setAttribute("disabled", "likes");
+        document.getElementById('like_button').setAttribute("disabled", "disabled");
     }
 
     const styles = {
@@ -60,7 +60,7 @@ const Detail = (props) => {
             <Paper elevation={6} style={styles.paper}>
             <h2>Pet type: <strong>{pet.type}</strong></h2>
             <p>Pet Description: <strong>{pet.desc}</strong></p>
-            <p>Pet Skills: <strong>{pet.skill1} | {pet.skill2}</strong></p>
+            <p>Pet Skills: <strong>{pet.skill1} | {pet.skill2} | { pet.skill3 }</strong></p>
 
             <Button id="like_button" disabled={likes} color="success"
             onClick= { e => likePet(pet._id) }>

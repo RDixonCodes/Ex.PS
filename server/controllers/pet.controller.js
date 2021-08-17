@@ -1,8 +1,8 @@
 const Pet = require('../models/pet.model');
 
 module.exports.createPet = (req, res) => {
-    const { name, type, desc, skill1, skill2 } = req.body;
-    Pet.create({name, type, desc, skill1, skill2})
+    const { name, type, desc, skill1, skill2, skill3 } = req.body;
+    Pet.create({name, type, desc, skill1, skill2, skill3})
     .then(pet => res.json(pet))
     .catch(err => res.status(400).json(err));
 };
@@ -21,14 +21,14 @@ module.exports.getPet = (req, res) => {
 
 module.exports.updatePet = (req, res) => {
     Pet.findOneAndUpdate({ _id: req.params.id }, req.body, { runValidators: true, new: true })
-    .then(updatedPet => res.json({ pet: updatedPet }))
-    .catch(err => res.json(err));
+    .then(updatedPet => res.json(updatedPet))
+    .catch(err => res.status(400).json(err));
 };
 
 module.exports.likePet = (req, res) => {
-    Pet.findOneAndUpdate( {_id: req.params._id},
+    Pet.updateOne( {_id: req.params._id},
         {$inc: {likes:1} } )
-    .then(() => res.json({ message: "likes increased"}))
+    .then(() => res.json({message:"Likes increased"}))
     .catch(err=> res.json(err));
 };
 module.exports.deletePet = (req, res) => {

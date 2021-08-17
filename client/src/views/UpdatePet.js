@@ -14,6 +14,7 @@ const UpdatePet = (props) => {
     const [desc, setDesc] = useState();
     const [skill1, setSkill1] = useState();
     const [skill2, setSkill2] = useState();
+    const [skill3, setSkill3] = useState();
     const [pet, setPet] = useState({});
     const [errors, setErrors] = useState([]);
     
@@ -25,17 +26,19 @@ const UpdatePet = (props) => {
                 setDesc(res.data.desc);
                 setSkill1(res.data.skill1);
                 setSkill2(res.data.skill2);
+                setSkill3(res.data.skill3);
             })
     }, [])
 
-    const updatePet = (e) => {
+    const updatePet = (e, data) => {
         e.preventDefault()
         axios.put('http://localhost:8000/api/pets/' + id + '/edit', {
             name, 
             type,
             desc,
             skill1,
-            skill2
+            skill2,
+            skill3
         })
         .then(() => navigate('/'))
             .catch(err => {
@@ -65,7 +68,8 @@ const UpdatePet = (props) => {
         },
         h1: {
             display: "inline-block",
-            marginTop:50
+            marginTop:50,
+            marginBottom:20
         },
         p: {
             display:"inline-block",
@@ -88,32 +92,38 @@ const UpdatePet = (props) => {
                     value={name} onChange={(e)=>setName(e.target.value)} color="secondary"/>
                     <FormHelperText>Name</FormHelperText>
                     </FormControl><br/>
+
                     <FormControl variant="outlined" size="small" style={styles.input} errors="true">
-                    
                     <OutlinedInput type="text" name="type"
                     value={type} onChange={(e)=> setType(e.target.value)} color="secondary"/>
                     <FormHelperText>Type</FormHelperText>
                     </FormControl><br/>
-                    
+
                     <FormControl variant="outlined" size="small" style={styles.input} errors="true">
                     <OutlinedInput label="Description" type="text" name="desc"
                     value={desc} onChange={(e)=>setDesc(e.target.value)} color="secondary"/>
                     <FormHelperText>Description</FormHelperText>
                     </FormControl><br/>
+                    
                     <FormControl variant="outlined" size="small" style={styles.input}>
-            
                     <OutlinedInput type="text" name="skill1"
                     value={skill1} onChange={(e)=>setSkill1(e.target.value)} color="secondary"/>
-                    <FormHelperText>Skill 1</FormHelperText>
+                    <FormHelperText>First Skill</FormHelperText>
                     </FormControl><br/>
+                    
                     <FormControl variant="outlined" size="small" style={styles.input}>
-
                     <OutlinedInput type="text" name="skill2"
                     value={skill2} onChange={(e)=>setSkill2(e.target.value)} color="secondary"/>
-                    <FormHelperText>Skill 2</FormHelperText>
+                    <FormHelperText>Second Skill</FormHelperText>
+                    </FormControl><br/>
+
+                    <FormControl variant="outlined" size="small" style={styles.input}>
+                    <OutlinedInput type="text" name="skill3"
+                    value={skill3} onChange={(e)=>setSkill3(e.target.value)} color="secondary"/>
+                    <FormHelperText>Third Skill</FormHelperText>
                     </FormControl><br/>
                 <Button type="submit" variant="contained" color="primary">
-                &#9999; Edit Pet
+                &#9999; Update Pet
                 </Button>
             </form>
         </Paper>
