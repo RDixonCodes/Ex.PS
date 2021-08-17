@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors')
-const socket = require('socket.io');
 const app = express();
 require('./config/mongoose.config');
 app.use(cors());
