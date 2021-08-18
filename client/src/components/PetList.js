@@ -2,13 +2,37 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { navigate, Link } from '@reach/router';
 import { Button } from '@material-ui/core';
-import DeleteButton from './DeleteButton';
+import io from 'socket.io-client';
+
 
 const PetList = (props) => {
     const [pets, setPets] = useState();
     const [skill1, setSkill1] = useState("");
     const [skill2, setSkill2] = useState("");
     const [skill3, setSkill3] = useState("");
+    const [ socket ] = useState(() => io(":8000") );
+    
+
+    useEffect(() =>{
+        console.log("inside of useEffect for socktes");
+
+         //listen useing the .on()
+        socket.on("connect", () => {
+            console.log("We are connected with the server on: " + socket.id);
+        });
+
+
+        socket.on("pet_deleted", (data) => {
+
+            console.log(data);
+            console.log("Previous pets state: ");
+            console.log(pets);
+            setPets((previousPetsValue) => {
+                console.log("Inside setPets: " + previousPetsValue);
+                return [...previousPetsValue, data];
+            });
+        });
+    }, []);
 
     useEffect(() => {
         axios.get('http://localhost:8000/api/')

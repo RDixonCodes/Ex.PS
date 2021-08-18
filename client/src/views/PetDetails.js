@@ -4,12 +4,30 @@ import { Link, navigate } from '@reach/router';
 import { Paper } from '@material-ui/core';
 import { Button } from 'reactstrap';
 import DeleteButton from '../components/DeleteButton';
+import io from 'socket.io-client';
 
 const Detail = (props) => {
     const { _id, petDetails } = props; 
+    // const [ socket ] = useState(() => io(":8000") );
     const [pet, setPet] = useState({});
     const [likes, setLikes] = useState(0);
     const [errors, setErrors] = useState();
+
+    // useEffect(() =>{
+    //     console.log("inside of useEffect for socktes");
+
+    //      //listen useing the .on()
+    //     socket.on("connect", () => {
+    //         console.log("We are connected with the server on: " + socket.id);
+    //     });
+
+
+    //     socket.on("pet_deleted", (data) => {
+
+    //         console.log(data);
+    //     })
+    // }, [])
+
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/pets/" + props.id)
