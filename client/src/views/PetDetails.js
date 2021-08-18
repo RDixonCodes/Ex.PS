@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 import DeleteButton from '../components/DeleteButton';
 
 const Detail = (props) => {
-    const {_id} = props; 
+    const { _id, petDetails } = props; 
     const [pet, setPet] = useState({});
     const [likes, setLikes] = useState(0);
     const [errors, setErrors] = useState();
@@ -19,20 +19,13 @@ const Detail = (props) => {
         .catch(err => {console.log(err)});
     }, [])
 
-    // const{ removeFromDom } = props;
-    const deletePet = petId => {
-        axios.delete('http://localhost:8000/api/pets' + petId + "/delete")
-            .then( res =>{ 
-                props.removeFromDom(petId)
-        }).catch(errors => { console.log(errors)});
-    }
-
-    const likePet = _id => {
-        axios.put("http://localhost:8000/api/like/" + _id, { likes:1 })
-        .then(res => console.log(res.data))
+    const likePet = () => {
+        axios.put("http://localhost:8000/api/like/" + _id, { likes })
+        .then(res => {setLikes(res.data.likes)})
         .catch(err => console.log(err));
         document.getElementById('like_button').setAttribute("disabled", "disabled");
     }
+
 
     const styles = {
         paper: {
@@ -63,9 +56,9 @@ const Detail = (props) => {
             <p>Pet Skills: <strong>{pet.skill1} | {pet.skill2} | { pet.skill3 }</strong></p>
 
             <Button id="like_button" disabled={likes} color="success"
-            onClick= { (e) => likePet(pet._id) }>
+            onClick= { e => setLikes(likes + 1) }>
                 &#128077; Like {pet.name}</Button> 
-                <p>{pet.likes} like(s)</p>
+                <p>{likes} like(s)</p>
             </Paper>
         </div>
     )

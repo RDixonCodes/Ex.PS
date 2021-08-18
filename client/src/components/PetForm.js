@@ -45,8 +45,8 @@ const PetForm = (props) => {
 
     const styles = {
         paper: {
-            width: "50rem", padding: "1rem",
-            marginLeft:320
+            width: "40rem", padding: "rem",
+            marginLeft:400
         },
         input: {
             marginBottom: "1rem",
@@ -61,14 +61,15 @@ const PetForm = (props) => {
             marginTop: 50
         },
         h1: {
-            display:"inline-Block"
+            display:"inline-Block",
+            marginTop:50
         },
         h2: {
-            marginRight: 390
+            marginRight: 230
         },
         p: {
             display:"inline-block",
-            marginLeft:510
+            marginLeft:345
         }
 
     }

@@ -26,9 +26,9 @@ module.exports.updatePet = (req, res) => {
 };
 
 module.exports.likePet = (req, res) => {
-    Pet.updateOne( {_id: req.params._id},
-        {$inc: {likes:1} } )
-    .then(() => res.json({message:"Likes increased"}))
+    Pet.findOneAndUpdate( {_id: req.params._id},
+        {$inc: {likes:1} }, { new: true} )
+    .then((updatedPet) => res.json({updatedPet:updatedPet}))
     .catch(err=> res.json(err));
 };
 module.exports.deletePet = (req, res) => {
